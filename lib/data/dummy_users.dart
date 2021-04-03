@@ -5,12 +5,10 @@ const DUMMY_USERS = {
     id: '1',
     name: 'Chema',
     year: '1984',
-    avatar: null,
   ),
   '2': const User(
     id: '2',
     name: 'Chema2',
     year: '1984',
-    avatar: null,
   ),
 };

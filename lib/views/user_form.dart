@@ -12,7 +12,6 @@ class UserForm extends StatelessWidget {
       _formData['id'] = user.id;
       _formData['name'] = user.name;
       _formData['year'] = user.year;
-      _formData['avatar'] = user.avatar;
     }
   }
 
@@ -31,17 +30,36 @@ class UserForm extends StatelessWidget {
               onPressed: () {
                 final isValid = _form.currentState.validate();
                 if (isValid) {
-                  _form.currentState.save();
-                  Provider.of<Users>(context, listen: false).put(
-                    User(
-                      id: _formData['id'],
-                      name: _formData['name'],
-                      year: _formData['year'],
-                      avatar: _formData['avatar'],
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text('Atenção'),
+                      content:
+                          Text('Tem certeza que deseja adicionar o usuário?'),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Confirmar'),
+                          onPressed: () {
+                            _form.currentState.save();
+                            Provider.of<Users>(context, listen: false).put(User(
+                              id: _formData['id'],
+                              name: _formData['name'],
+                              year: _formData['year'],
+                            ));
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('Cancelar'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     ),
                   );
-
-                  Navigator.of(context).pop();
                 }
               },
             ),
@@ -80,11 +98,6 @@ class UserForm extends StatelessWidget {
                       return null;
                     },
                     onSaved: (value) => _formData['year'] = value,
-                  ),
-                  TextFormField(
-                    initialValue: _formData['avatar'],
-                    decoration: InputDecoration(labelText: 'URL do avatar'),
-                    onSaved: (value) => _formData['avatar'] = value,
                   ),
                 ],
               ),

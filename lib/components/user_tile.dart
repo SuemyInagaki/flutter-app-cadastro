@@ -11,9 +11,7 @@ class UserTile extends StatelessWidget {
   const UserTile(this.user);
   @override
   Widget build(BuildContext context) {
-    final avatar = user.avatar == null || user.avatar.isEmpty
-        ? CircleAvatar(child: Icon(Icons.person))
-        : CircleAvatar(backgroundImage: NetworkImage(user.avatar));
+    final avatar = CircleAvatar(child: Icon(Icons.person));
 
     return Dismissible(
       background: Container(color: Colors.blue[100]),
@@ -22,7 +20,7 @@ class UserTile extends StatelessWidget {
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('Excluir Usuario'),
+            title: Text('Atenção'),
             content: Text('Usuário excluido com sucesso!'),
             actions: <Widget>[
               FlatButton(

@@ -32,7 +32,6 @@ class Users with ChangeNotifier {
                 id: user.id,
                 name: user.name,
                 year: user.year,
-                avatar: user.avatar,
               ));
     } else {
       final id = Random().nextDouble().toString();
@@ -42,7 +41,6 @@ class Users with ChangeNotifier {
                 id: id,
                 name: user.name,
                 year: user.year,
-                avatar: user.avatar,
               ));
     }
 
